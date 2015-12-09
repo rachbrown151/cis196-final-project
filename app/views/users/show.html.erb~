@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<h3> Tweets </h3>
+<% @sort_tweets.each do |tweet| %>
+  <tr>
+    <td><%= tweet.text %></td>
+    <td> Hashtags:
+    <% tweet.hashtags.each do |hashtag| %>
+    <%= link_to ' ' + hashtag.tag, hashtag_path(hashtag.tag) %>
+    <% end %></td>
+    <% if logged_in? && current_user.id == @user.id %>
+      <td><%= link_to 'Edit', edit_tweet_path(tweet.id) %></td>
+      <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tr>
+  <br>
+<% end %>
+<br><br>
+
+<h3> Followers </h3>
+<% @user.followers.each do |follower| %>
+  <tr>
+    <td><%= link_to User.find(follower).name, user_path(User.find(follower)) %></td>
+  </tr>
+<% end %>
+<br><br>
+
+<h3> Following </h3>
+<% @user.following.each do |follow| %>
+  <tr>
+    <td><%= link_to User.find(follow).name, user_path(User.find(follow)) %></td>
+  </tr>
+<% end %>
+<br><br>
+
+<h3> Actions </h3> 
+<% if logged_in? && current_user.id == @user.id %>
+  <%= link_to 'Edit Profile', edit_user_path(@user) %> |
+  <%= link_to 'New Tweet', new_tweet_path(:user => current_user ) %> |
+  <%= link_to 'Delete Profile', destroy_user_path(@user), method: :delete, data: { confirm: 'Are you sure?' } %>  |
+<% end %>
+<%= link_to 'Follow', follow_user_path(@user), method: :post %>

@@ -1,0 +1,14 @@
+<h1 id="log_in">Log In</h1>
+<%= form_tag(@user) do %>
+  <div class="field">
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
+  </div>
+  <div class="field">
+    <%= label_tag :user_password %>
+    <%= text_field_tag :user_password %>
+  </div>
+  <div class="action">
+    <%= submit_tag "Log in" %>
+  </div>
+<% end %>

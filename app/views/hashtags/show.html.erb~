@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tweets:</strong>
+  <% @hashtags.each do |hashtag| %>
+    <%= Tweet.find(hashtag.tweet_id).text %><br>
+  <% end %>
+</p>

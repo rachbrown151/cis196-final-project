@@ -1,0 +1,16 @@
+<nav class="nav-banner">
+  <a class="nav-btn" href="/">Home</a> |
+  <a class="nav-btn" href="/users">Users</a> |
+  <!-- Add link to user's show page and log out button if logged in -->
+  <% if logged_in? %>
+  <%= link_to 'Log out', logout_path, :method => :delete %> |
+  <%= link_to current_user, user_path(current_user), method: :get %> |
+
+  <!-- Add log out link otherwise -->
+  <% else %>
+  <%= link_to 'Log in', login_path %> |
+  <%= link_to 'Sign up', new_user_path %> |
+  <% end %>
+
+  </span>
+</nav>

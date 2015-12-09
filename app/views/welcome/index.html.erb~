@@ -1,0 +1,29 @@
+<h1 class="welcome-banner">Welcome to Twitter Lite!</h1>
+<p id="notice"><%= notice %></p><br>
+
+<% if logged_in? %>
+  <p> Hi <%= current_user.name %></p>
+ 
+  <!-- Add search bar -->
+  <%= form_tag(@welcome) do |f| %>
+  <div class="field">
+    <h3><%= label_tag :"Search for a user by name!" %></h3>
+    <%= text_field_tag :name %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Search"%>
+  </div>
+  <% end %>
+
+  <h3> Tweets from users you are following:</h3>
+  <% @all_tweets_sort.each do |tweet| %>
+  <tr>
+    <td><%= tweet.text %></td>
+    <td> Hashtags:
+    <% tweet.hashtags.each do |hashtag| %>
+    <%= link_to ' ' + hashtag.tag, hashtag_path(hashtag.tag) %>
+    <% end %></td>
+  </tr>
+  <br>
+<% end %>
+<% end %>
